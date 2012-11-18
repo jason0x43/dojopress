@@ -2,7 +2,7 @@ DojoPress
 =========
 
 DojoPress is a [LetterPress](http://www.atebits.com/letterpress/) clone built
-with the [Dojo](http://dojotoolkit.org).
+with the [Dojo framework](http://dojotoolkit.org).
 
 I created this project after a friend showed me eviltrout's
 [EmberPress](https://github.com/eviltrout/emberpress). I've been working with
@@ -19,7 +19,7 @@ together at load time. Internally the game makes use of a couple of Dojo's DOM
 manipulation libraries, its array helpers, some Dijits, dynamic stylesheet
 creation, fx (animation), and the topic system.
 
-To run DojoPress in Safari and Firefox, just clone the repo and open
+To run DojoPress in Safari and Firefox, just clone this repository and open
 the index.html file in the browser. Chrome requires a command line flag to let
 everything load properly from the file system. On a Mac, start Chrome with:
 
