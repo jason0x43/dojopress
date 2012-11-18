@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      dojoConfig = {
+        async: true
+      };
+    </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.8.1/dojo/dojo.js">
+    </script>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.8.1/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="dojopress.css">
+  </head>
+  <body class="claro">
+    <div id="game" class="game"></div>
+
+    <script>
+      require(['./dojopress.js', './dictionary.js', 'dojo/domReady!'],
+              function(dojopress, dictionary) {
+        new dojopress({dictionary: dictionary}, dojo.byId('game'));
+      });
+    </script>
+  </body>
+</html>

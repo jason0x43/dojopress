@@ -1,0 +1,132 @@
+body {
+  font-family: sans-serif;
+}
+
+.game {
+  position: relative;
+  margin: 0 auto;
+  top: 50px;
+}
+
+.board { position: relative; }
+
+.cover {
+  display: none;
+  position: absolute;
+  background: white;
+  opacity: 0.25;
+}
+
+.word { margin: 0 auto; }
+
+.letter {
+  display: inline-block;
+  position: absolute;
+  text-align: center;
+  cursor: pointer;
+  -webkit-user-select: none;
+  background: #f0f0f0;
+}
+.letter.invisible { display: none; }
+.letter.moving { z-index: 500; }
+
+.letter:active { background: #e7e7e7; }
+
+.players {
+  text-align: center;
+}
+.players .player:last-child {
+  margin-left: 20px;
+}
+
+.player {
+  border: solid 4px;
+  border-radius: 8px;
+  display: inline-block;
+  color: white;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+  -webkit-user-select: none;
+}
+
+.player.forecast {
+  color: yellow;
+}
+
+.player1 { background: #ccf; border-color: #ccf; }
+.player2 { background: #fcc; border-color: #fcc; }
+.player2.defended { background: #faa; }
+.player1.defended { background: #aaf; }
+
+.turn {
+  -webkit-transition: all .5s;
+}
+
+.player1.turn { background: #77f; border-color: #00f; }
+.player2.turn { background: #f77; border-color: #f00; }
+
+.buttons {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.buttons .dijitButton { margin-left: 10px; }
+.buttons .dijitButton:first-child { margin-left: 0; }
+
+.dijitButtonNode {
+  border: solid 1px #bdb;
+  border-radius: 4px;
+  text-align: center;
+  display: inline-block;
+  padding: 3px 6px;
+  cursor: pointer;
+  background: #dfd;
+  -webkit-transition: all 0.2s;
+  -webkit-user-select: none;
+}
+
+.dijitButtonNode:hover {
+  background: #bfb;
+  border-color: #383;
+  -webkit-transition: all 0.5s;
+}
+
+.dijitButtonNode:active {
+  background: #8e8;
+  -webkit-transition: all 0;
+}
+
+.dijitDisabled .dijitButtonNode,
+.dijitDisabled .dijitButtonNode:active,
+.dijitDisabled .dijitButtonNode:hover {
+  background: #ddd;
+  color: #777;
+  border-color: #bbb;
+  outline: none;
+}
+
+:focus {
+  outline: none;
+}
+
+.wordlist {
+  position: absolute;
+  overflow: auto;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  height: 100px;
+  top: 0;
+}
+
+.wordlist li { padding: 2px 4px; -webkit-user-select: none; }
+.wordlist li.player1 { background: none; color: #ccf; }
+.wordlist li.player2 { background: none; color: #fcc; }
+
+.claro .error .dijitDialogTitleBar { background-color: #ffabab; }
+.claro .dijitDialogUnderlay { opacity: 0.8; }
