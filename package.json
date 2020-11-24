@@ -1,0 +1,24 @@
+{
+  "name": "dojopress",
+  "version": "1.0.0",
+  "description": "A Letterpress clone written with the Dojo Toolkit",
+  "private": true,
+  "main": "dojopress.js",
+  "scripts": {
+    "start": "static"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jason0x43/dojopress.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jason0x43/dojopress/issues"
+  },
+  "homepage": "https://github.com/jason0x43/dojopress#readme",
+  "dependencies": {
+    "node-static": "~0.7.11"
+  }
+}
