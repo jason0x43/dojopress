@@ -8,7 +8,6 @@ define([
   'dojo/fx',
   'dojo/fx/easing',
   'dojo/_base/lang',
-  'dojo/_base/array',
   'dojo/_base/declare'
 ], function(
   dom,
@@ -17,7 +16,6 @@ define([
   fx,
   easing,
   lang,
-  array,
   declare
 ) {
   return declare(_WidgetBase, {

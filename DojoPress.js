@@ -10,7 +10,6 @@ define([
   'dojo/dom-construct',
   'dojo/dom-style',
   'dijit/_WidgetBase',
-  'dojo/on',
   'dojo/topic',
   'dijit/Dialog',
   'dijit/form/Button',
@@ -26,7 +25,6 @@ define([
   dom,
   domStyle,
   _WidgetBase,
-  on,
   topic,
   Dialog,
   Button,
@@ -179,7 +177,7 @@ define([
       });
       buttons.appendChild(submit.domNode);
 
-      this._word.watch('length', function(name, oVal, nVal) {
+      this._word.watch('length', function(_name, _oVal, nVal) {
         submit.set('disabled', 0 == nVal);
         clear.set('disabled', 0 == nVal);
       });
