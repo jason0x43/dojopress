@@ -170,6 +170,15 @@ define([
       });
       buttons.appendChild(clear.domNode);
 
+      var pass = new Button({
+        label: 'Pass',
+        onClick: lang.hitch(this, function() {
+          this.player.passed = true;
+          this._finishTurn();
+        })
+      });
+      buttons.appendChild(pass.domNode);
+
       var submit = new Button({
         label: 'Submit',
         disabled: true,
@@ -234,6 +243,12 @@ define([
       row.push(letter);
 
       letter.on('click', lang.hitch(this, function() {
+        // ignore clicks on letters defended by the other player
+        const defender = this._getLetterDefender(letter.row, letter.col);
+        if (defender && defender !== this.player.id) {
+          return;
+        }
+
         if (this._word.contains(letter)) {
           this._word.remove(letter);
         } else {
@@ -253,8 +268,22 @@ define([
       } else {
         this._wordlist.add(this._word.toString(), this.player.id);
         this._word.setOwner(this.player.id);
+        this.player.passed = false;
         this._finishTurn();
       }
+    },
+
+    // return true if all letters are owned
+    _gridIsOwned: function() {
+      for (var r = 0; r < this._grid.length; r++) {
+        var row = this._grid[r];
+        for (var c = 0; c < row.length; c++) {
+          if (!row[c].get('owner')) {
+            return false;
+          }
+        }
+      }
+      return true;
     },
 
     // update the board state and switch players
@@ -264,7 +293,7 @@ define([
         for (var c = 0; c < this.config.columns; c++) {
           var letter = this._grid[r][c];
           scores[letter.get('owner')]++;
-          letter.set('defended', this._isLetterDefended(r, c));
+          letter.set('defended', this._getLetterDefender(r, c) != null);
         }
       }
 
@@ -273,8 +302,8 @@ define([
 
       this._word.clear();
       
-      // if the total score equals the total number of letters, game over
-      if (scores.player1 + scores.player2 == this.config.letterCount) {
+      // the game is over if all letters are owned or if both players pass
+      if (this._gridIsOwned() || (this.player1.passed && this.player2.passed)) {
         // drop the cover over the board
         domStyle.set(this._gridCover, 'display', 'block');
 
@@ -305,16 +334,21 @@ define([
       }).show();
     },
 
-    // indicate whether the letter at a given row and column is defended
-    _isLetterDefended: function(row, col) {
+    // get the defender of a letter at a given row and column, if it is
+    // defended
+    _getLetterDefender: function(row, col) {
       var owner = this._grid[row][col].get('owner');
-      if (!owner) return false;
       var lc = this.config.columns - 1;
       var lr = this.config.rows - 1;
-      return ((col == 0  || this._grid[row][col-1].get('owner') == owner) &&
-              (row == 0  || this._grid[row-1][col].get('owner') == owner) &&
-              (col == lc || this._grid[row][col+1].get('owner') == owner) &&
-              (row == lr || this._grid[row+1][col].get('owner') == owner));
+      if (
+        owner &&
+        (col == 0  || this._grid[row][col-1].get('owner') == owner) &&
+        (row == 0  || this._grid[row-1][col].get('owner') == owner) &&
+        (col == lc || this._grid[row][col+1].get('owner') == owner) &&
+        (row == lr || this._grid[row+1][col].get('owner') == owner)
+      ) {
+        return owner;
+      }
     },
 
     // set the current player
