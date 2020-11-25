@@ -210,7 +210,7 @@ define([
       domStyle.set(this._gridCover, 'display', 'none');
 
       var letters = this.test ? this.config.letters
-                              : this._randomLetters(this.config.letterCount);
+                              : this._randomLetters(this.config.letterCount, engChars);
 
       array.forEach(letters, function(letter, i) {
         var col = i % this.config.columns;
